@@ -1,16 +1,9 @@
-
 package com.ProyectoFinalArgProg.crud.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
-/**
- *
- * @author fungirak
- */
 
 @Entity
 public class Experiencia {
@@ -19,24 +12,23 @@ public class Experiencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String empresa;
-    private String ubicacion;  
+    private String ubicacion;
     private String puesto;
     private String periodo;
     private String actividades;
 
+    public Experiencia() {
 
-    public Experiencia(){
-    
     }
 
-    public Experiencia(String empresa, String ubicacion, String puesto, String periodo, String actividades){
-       this.empresa = empresa;
-       this.ubicacion = ubicacion;
-       this.puesto = puesto;
-       this.periodo = periodo;
-       this.actividades = actividades;
+    public Experiencia(String empresa, String ubicacion, String puesto, String periodo, String actividades) {
+        this.empresa = empresa;
+        this.ubicacion = ubicacion;
+        this.puesto = puesto;
+        this.periodo = periodo;
+        this.actividades = actividades;
     }
- 
+
     public Long getId() {
         return id;
     }
@@ -85,6 +77,4 @@ public class Experiencia {
         this.actividades = actividades;
     }
 
-
-   
 }

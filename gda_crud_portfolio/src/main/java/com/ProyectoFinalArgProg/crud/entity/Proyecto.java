@@ -1,17 +1,9 @@
-
 package com.ProyectoFinalArgProg.crud.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
-/**
- *
- * @author fungirak
- */
-
 
 @Entity
 public class Proyecto {
@@ -21,20 +13,18 @@ public class Proyecto {
     private Long id;
     private String titulo;
     private String imagen;
-    private String descripcion;  
-   
+    private String descripcion;
 
+    public Proyecto() {
 
-    public Proyecto(){
-    
     }
 
-    public Proyecto(String titulo, String imagen, String descripcion){
-       this.titulo = titulo;
-       this.imagen = imagen;
-       this.descripcion = descripcion;
+    public Proyecto(String titulo, String imagen, String descripcion) {
+        this.titulo = titulo;
+        this.imagen = imagen;
+        this.descripcion = descripcion;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -66,9 +56,5 @@ public class Proyecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
- 
-
-   
-
 
 }

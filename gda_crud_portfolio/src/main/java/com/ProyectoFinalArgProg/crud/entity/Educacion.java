@@ -1,17 +1,9 @@
-
 package com.ProyectoFinalArgProg.crud.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
-/**
- *
- * @author fungirak
- */
-
 
 @Entity
 public class Educacion {
@@ -20,23 +12,22 @@ public class Educacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String institucion;
-    private String titulo;  
+    private String titulo;
     private String periodo;
     private String estado;
     private String detalles;
 
+    public Educacion() {
 
-    public Educacion(){
-    
     }
 
-    public Educacion(String institucion, String titulo, String periodo, String estado, String detalles){
-       this.institucion = institucion;
-       this.titulo = titulo;
-       this.periodo = periodo;
-       this.estado = estado;
-       this.detalles = detalles;
-      
+    public Educacion(String institucion, String titulo, String periodo, String estado, String detalles) {
+        this.institucion = institucion;
+        this.titulo = titulo;
+        this.periodo = periodo;
+        this.estado = estado;
+        this.detalles = detalles;
+
     }
 
     public Long getId() {
@@ -87,6 +78,4 @@ public class Educacion {
         this.detalles = detalles;
     }
 
-
-    
 }

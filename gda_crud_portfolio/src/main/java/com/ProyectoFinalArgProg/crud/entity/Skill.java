@@ -7,10 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-/**
- *
- * @author fungirak
- */
 
 @Entity
 public class Skill {

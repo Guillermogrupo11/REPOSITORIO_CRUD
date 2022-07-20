@@ -1,16 +1,9 @@
-
 package com.ProyectoFinalArgProg.crud.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-/**
- *
- * @author fungirak
- */
-
 
 @Entity
 public class AcercaDe {
@@ -19,18 +12,17 @@ public class AcercaDe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullname;
-    private String posicion; 
+    private String posicion;
     private String descripcion;
 
+    public AcercaDe() {
 
-    public AcercaDe(){
-    
     }
 
-    public AcercaDe(String fullname, String posicion, String descripcion){
-       this.fullname = fullname;
-       this.posicion = posicion;
-       this.descripcion = descripcion;
+    public AcercaDe(String fullname, String posicion, String descripcion) {
+        this.fullname = fullname;
+        this.posicion = posicion;
+        this.descripcion = descripcion;
     }
 
     public Long getId() {
@@ -65,8 +57,4 @@ public class AcercaDe {
         this.descripcion = descripcion;
     }
 
-   
-
-    
-    
 }
