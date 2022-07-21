@@ -22,77 +22,72 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "*")
 public class ProyectoController {
-    
-
 
 //-------------------------- PROYECTO CONTROLLER ----------------------------------
     @Autowired
     private ProyectoService proServ;
 
     @PreAuthorize("hasRole('USER')")
-        @GetMapping("/proyectos")
-            public ResponseEntity<List<Proyecto>> list(){
-                List<Proyecto> list = proServ.verProyectos();
-                return new ResponseEntity(list, HttpStatus.OK);
-            }
+    @GetMapping("/proyectos")
+    public ResponseEntity<List<Proyecto>> list() {
+        List<Proyecto> list = proServ.verProyectos();
+        return new ResponseEntity(list, HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('USER')")
-        @GetMapping("/proyectos/{id}")
-            public ResponseEntity<Proyecto> getById(@PathVariable("id") Long id){
-                if(!proServ.existsProyecto(id))
-                    return new ResponseEntity(new Mensaje("No existe el Item buscado."), HttpStatus.NOT_FOUND);
-                Proyecto proy = proServ.buscarProyecto(id);
-                return new ResponseEntity(proy, HttpStatus.OK);
-            }
-    
-    @PreAuthorize("hasRole('USER')")
-        @PostMapping("/proyectos")
-        public ResponseEntity<?> create(@RequestBody ProyectoDto proyect){
-            Proyecto proyectNuevo = new Proyecto( proyect.getTitulo(), proyect.getImagen(), proyect.getDescripcion() );
-            proServ.crearProyecto(proyectNuevo);
-            return new ResponseEntity(new Mensaje("Proyecto Item creado."), HttpStatus.OK);
+    @GetMapping("/proyectos/{id}")
+    public ResponseEntity<Proyecto> getById(@PathVariable("id") Long id) {
+        if (!proServ.existsProyecto(id)) {
+            return new ResponseEntity(new Mensaje("No existe el Item buscado."), HttpStatus.NOT_FOUND);
         }
-
-     @PreAuthorize("hasRole('USER')")
-        @DeleteMapping("/proyectos/{id}")
-        public ResponseEntity<?> delete(@PathVariable("id")Long id){
-            if(!proServ.existsProyecto(id))
-                return new ResponseEntity(new Mensaje("No existe el Item buscado."), HttpStatus.NOT_FOUND);
-            proServ.borrarProyecto(id);
-            return new ResponseEntity(new Mensaje("Item Proyecto eliminado."), HttpStatus.OK);
-        }
+        Proyecto proy = proServ.buscarProyecto(id);
+        return new ResponseEntity(proy, HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('USER')")
-        @PutMapping("/proyectos/{id}")
-        public ResponseEntity<?> update(@PathVariable("id")Long id, @RequestBody ProyectoDto proyDto){
-            if(!proServ.existsProyecto(id))
-                return new ResponseEntity(new Mensaje("No existe el item buscado."), HttpStatus.NOT_FOUND);
-            if(StringUtils.isBlank(proyDto.getTitulo()))
-                return new ResponseEntity(new Mensaje("Ingresar el Titulo es obligatorio."), HttpStatus.BAD_REQUEST);
-            if(StringUtils.isBlank(proyDto.getImagen()))
-                return new ResponseEntity(new Mensaje("Ingresar la Imagen es obligatorio."), HttpStatus.BAD_REQUEST);
-            if(StringUtils.isBlank(proyDto.getDescripcion()))
-                return new ResponseEntity(new Mensaje("Ingresar la Descripcion es obligatorio."), HttpStatus.BAD_REQUEST);
-            
+    @PostMapping("/proyectos")
+    public ResponseEntity<?> create(@RequestBody ProyectoDto proyect) {
+        Proyecto proyectNuevo = new Proyecto(proyect.getTitulo(), proyect.getImagen(), proyect.getDescripcion());
+        proServ.crearProyecto(proyectNuevo);
+        return new ResponseEntity(new Mensaje("Proyecto Item creado."), HttpStatus.OK);
+    }
 
-            Proyecto proyEdit = proServ.buscarProyecto(id);
-            proyEdit.setTitulo(proyDto.getTitulo());
-            proyEdit.setImagen(proyDto.getImagen());
-            proyEdit.setDescripcion(proyDto.getDescripcion());
-            proServ.crearProyecto(proyEdit);
-            return new ResponseEntity(new Mensaje("Item Proyecto actualizado."), HttpStatus.OK);
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/proyectos/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        if (!proServ.existsProyecto(id)) {
+            return new ResponseEntity(new Mensaje("No existe el Item buscado."), HttpStatus.NOT_FOUND);
         }
-  //-------------------------- FIN PROYECTO CONTROLLER ----------------------------------
- 
-  // ************************************************************************************
+        proServ.borrarProyecto(id);
+        return new ResponseEntity(new Mensaje("Item Proyecto eliminado."), HttpStatus.OK);
+    }
 
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("/proyectos/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ProyectoDto proyDto) {
+        if (!proServ.existsProyecto(id)) {
+            return new ResponseEntity(new Mensaje("No existe el item buscado."), HttpStatus.NOT_FOUND);
+        }
+        if (StringUtils.isBlank(proyDto.getTitulo())) {
+            return new ResponseEntity(new Mensaje("Ingresar el Titulo es obligatorio."), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(proyDto.getImagen())) {
+            return new ResponseEntity(new Mensaje("Ingresar la Imagen es obligatorio."), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(proyDto.getDescripcion())) {
+            return new ResponseEntity(new Mensaje("Ingresar la Descripcion es obligatorio."), HttpStatus.BAD_REQUEST);
+        }
 
-
+        Proyecto proyEdit = proServ.buscarProyecto(id);
+        proyEdit.setTitulo(proyDto.getTitulo());
+        proyEdit.setImagen(proyDto.getImagen());
+        proyEdit.setDescripcion(proyDto.getDescripcion());
+        proServ.crearProyecto(proyEdit);
+        return new ResponseEntity(new Mensaje("Item Proyecto actualizado."), HttpStatus.OK);
+    }
 
 }
